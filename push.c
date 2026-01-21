@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>
+#include <unistd.h>
 
 void copy_list(int *origin, int *copy, int size)
 {
@@ -15,10 +16,34 @@ void copy_list(int *origin, int *copy, int size)
 }
 
 
+void sort_list(int *list, int size)
+{
+  int i;
+  int change;
+  int temp;
+
+  change = 1;
+  while(change)
+  {
+    i = 0;
+    change = 0;
+    while(i < size - 1)
+    {
+      if (list[i] > list[i +1])
+      {
+        temp = list[i];
+        list[i] = list[i + 1];
+        list[i + 1] = temp;
+        change = 1;
+      }
+      i++;
+    }
+  }
+}
 
 int is_num(char **s)
 {
-    int i = 0;
+    int i = 1;
     int j = 0;
     
     while (s[i])
@@ -43,8 +68,9 @@ int is_num(char **s)
 
 int is_valid(char **list, int *lista_nbr)
 {
-  int i = 0;
+  int i = 1;
   long result;
+  int j = 0;
   
   while (list[i])
     {
@@ -54,35 +80,57 @@ int is_valid(char **list, int *lista_nbr)
             printf("%s não é um número no intervalo de int\n", list[i]);
             return (0);
         }
-        lista_nbr[i] = (int)result;
+        lista_nbr[j] = (int)result;
         i++;
+        j++;
     }
   return (1);
 }
 
-int main(void)
+int check_for_duplicates(int *list, int size)
+{
+  int i; 
+  
+  i = 0;
+  while (i < size - 1)
+  {
+    if (list[i] == list[i + 1])
+    {
+      write(2, "duplicidade\n", 12);
+      return 0;
+    }
+    i++;  
+  }
+  return 1;
+}
+
+
+
+int main(int argc, char **argv)
 {
     int i;
-    char *list[] = {"+42","-9","65","5","659","12", NULL};
     int *lista_nbr;
     int *lista_nbr_copy;
     
-    i = is_num(list);
+    i = is_num(argv);
     if (!i)
     {
-      printf("valor invalido\n");
+      write(1,"valor invalido\n",15);
       return (0);
     }
+    i -= 1;
     lista_nbr = malloc(sizeof(int) * i);
     if (!lista_nbr)
         return (0);  
-    if (!is_valid(list,lista_nbr))
+    if (!is_valid(argv,lista_nbr))
     {
       free(lista_nbr);
       return (0);
-    } 
+    }
     printf("lista OK\n");
     lista_nbr_copy = malloc(sizeof(int) * i);
     copy_list(lista_nbr, lista_nbr_copy, i);
+    sort_list(lista_nbr_copy, i);
+    check_for_duplicates(lista_nbr_copy, i);
     return (0);
 }
