@@ -1,8 +1,20 @@
 #include "push_swap.h"
 
-size_t    ft_strlcpy(char *dst, const char *src, size_t dstsize);
+size_t  ft_strlcpy(char *dst, const char *src, size_t dstsize);
 size_t	ft_strlen(const char *s);
-long ft_atol(const char *str);
+long    ft_atol(const char *str);
+int     count_nums(char **nums);
+int     *nrb_array(int is_split,char **list);
+
+int count_nums(char **nums)
+{
+    int i;
+
+    i = 0;
+    while (nums[i])
+        i++;
+    return (i);
+}
 
 size_t    ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
@@ -44,4 +56,26 @@ long ft_atol(const char *str)
         str++;
     }
     return (res * sign);
+}
+
+int  *nrb_array(int is_split,char **list)
+{
+    int *list_nbr;
+    int len;
+    int i;
+
+    i = 0;
+    len = count_nums(list);
+    list_nbr = malloc(sizeof(int) * len);
+    if (!list_nbr)
+        return (NULL);
+    i = 0;
+    while (i < len)
+    {
+        list_nbr[i] = ft_atol(list[i]);
+        i++;
+    }
+    if (is_split)
+        free_list(list);
+    return (list_nbr);
 }
