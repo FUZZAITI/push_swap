@@ -2,31 +2,33 @@
 
 int is_num(char **s);
 int is_valid(char **list);
-void error_exit(void);
+int has_duplicates(char **nums);
 
 int is_num(char **s)
 {
-    int i = 1;
-    int j = 0;
+    int i;
+    int j;
     
+    i = 0;
+    j = 0;
     while (s[i])
     {
       if (!s[i][j] || !s[i][0])
-        error_exit();
+        return (0);
       if (s[i][j] == '+' || s[i][j] == '-')
         j++;
       if (!s[i][j])
-        error_exit();
+        return (0);
       while (s[i][j])
       {
         if (s[i][j] < '0' || s[i][j] > '9')
-            error_exit();
+            return (0);
         j++;
       }
       j = 0;
       i++;
     }
-    return (i);
+    return (1);
 }
 
 int is_valid(char **list)
@@ -39,14 +41,33 @@ int is_valid(char **list)
     {
         result = ft_atol(list[i]);
         if (result < INT_MIN || result > INT_MAX)
-            error_exit();
+            return (0);
         i++;   
     }
   return (1);
 }
 
-void error_exit(void)
+int has_duplicates(char **nums)
 {
-    write(2, "Error\n", 6);
-    exit(1);
+    int i;
+    int j;
+    long a;
+    long b;
+
+    i = 0;
+    while (nums[i])
+    {
+        a = ft_atol(nums[i]);
+        j = i + 1;
+        while (nums[j])
+        {
+            b = ft_atol(nums[j]);
+            if (a == b)
+                return (0);
+            j++;
+        }
+        i++;
+    }
+    return (1);
 }
+
