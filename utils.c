@@ -4,7 +4,7 @@ size_t  ft_strlcpy(char *dst, const char *src, size_t dstsize);
 size_t	ft_strlen(const char *s);
 long    ft_atol(const char *str);
 int     count_nums(char **nums);
-int     *nrb_array(int is_split,char **list);
+int    *nrb_array(char **list, int is_split);
 
 int count_nums(char **nums)
 {
@@ -58,21 +58,24 @@ long ft_atol(const char *str)
     return (res * sign);
 }
 
-int  *nrb_array(int is_split,char **list)
+int *nrb_array(char **list, int is_split)
 {
     int *list_nbr;
     int len;
     int i;
 
-    i = 0;
     len = count_nums(list);
     list_nbr = malloc(sizeof(int) * len);
     if (!list_nbr)
-        return (NULL);
+    {
+        if (is_split)
+            free_list(list);
+        error_exit();
+    }
     i = 0;
     while (i < len)
     {
-        list_nbr[i] = ft_atol(list[i]);
+        list_nbr[i] = (int)ft_atol(list[i]);
         i++;
     }
     if (is_split)
