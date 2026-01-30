@@ -50,6 +50,9 @@ int main(int argc, char** argv)
     index_array(array_nbr,sorted,size);
     free(sorted);
     
+    int i = max_bits(size);
+
+    printf("%d",i);
 
 }
 

@@ -25,6 +25,7 @@ int        *copy_array(int *arr, int size);
 int         count_nums(char **nums);
 void        sort_array(int *arr, int size);
 void        index_array(int *ori, int *sorted, int size);
+int         max_bits(int size);
 
 
 
