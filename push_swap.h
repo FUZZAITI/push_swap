@@ -19,8 +19,13 @@ void        error_exit(void);
 void        management_error(int i, char **s);
 void        free_list(char **lista);
 int         has_duplicates(char **nums);
-int        *parse_args(int len,char **lista);
-int        *nrb_array(int is_split,char **list);
+int        *parse_args(int len,char **lista, int *size);
+int        *nrb_array(char **list, int is_split);
+int        *copy_array(int *arr, int size);
+int         count_nums(char **nums);
+void        sort_array(int *arr, int size);
+void        index_array(int *ori, int *sorted, int size);
+
 
 
 
