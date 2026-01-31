@@ -1,4 +1,5 @@
 #include "push_swap.h"
+
 int *parse_args(int len,char **lista, int *size);
 
 
@@ -42,18 +43,20 @@ int main(int argc, char** argv)
     int *array_nbr;
     int *sorted;
     int  size;
-    
+    t_stack *a;
+    t_stack *b;
+
     if (argc < 2)
         return (0);   
     array_nbr = parse_args(argc,argv,&size);
     sorted = copy(array_nbr,size);
     index_array(array_nbr,sorted,size);
     free(sorted);
-    
-    int i = max_bits(size);
-
-    printf("%d",i);
-
+    a = init_stack(array_nbr,size);
+    b = NULL;
+    free(array_nbr);
+    radix_sort(&a, &b, size);
+    free_stack(&a);
 }
 
 
