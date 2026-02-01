@@ -78,7 +78,7 @@ int	main(int argc, char **argv)
 	free_stack(&a);
 }
 
-void short_sort(t_stack **a, t_stack **b, int size)
+void	short_sort(t_stack **a, t_stack **b, int size)
 {
 	if (size == 2)
 		sort_2(a);
@@ -89,4 +89,3 @@ void short_sort(t_stack **a, t_stack **b, int size)
 	else if (size == 5)
 		sort_5(a, b);
 }
-//c3r8p5% ARG=$(shuf -i 1-100 -n 100 | tr '\n' ' ');./push_swap $ARG | wc -l
