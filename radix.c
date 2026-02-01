@@ -14,6 +14,7 @@
 
 int		max_bits(int size);
 void	radix_sort(t_stack **a, t_stack **b, int size);
+int		is_sorted(t_stack *a);
 
 int	max_bits(int size)
 {
@@ -31,9 +32,11 @@ void	radix_sort(t_stack **a, t_stack **b, int size)
 	int	j;
 	int	bit;
 	int	value;
+	int	max;
 
+	max = max_bits(size);
 	bit = 0;
-	while (bit < max_bits(size))
+	while (bit < max)
 	{
 		j = 0;
 		while (j < size)
@@ -49,4 +52,15 @@ void	radix_sort(t_stack **a, t_stack **b, int size)
 			pa(a, b);
 		bit++;
 	}
+}
+
+int is_sorted(t_stack *a)
+{
+    while (a && a->next)
+    {
+        if (a->value > a->next->value)
+            return (0);
+        a = a->next;
+    }
+    return (1);
 }

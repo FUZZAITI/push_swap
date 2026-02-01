@@ -13,6 +13,7 @@
 #include "push_swap.h"
 
 int	*parse_args(int len, char **lista, int *size);
+void short_sort(t_stack **a, t_stack **b, int size);
 
 int	*parse_args(int len, char **lista, int *size)
 {
@@ -67,6 +68,25 @@ int	main(int argc, char **argv)
 	a = init_stack(array_nbr, size);
 	b = NULL;
 	free(array_nbr);
-	radix_sort(&a, &b, size);
+	if (!is_sorted(a))
+	{
+		if (size <= 5)
+			short_sort(&a, &b, size);
+		else
+			radix_sort(&a, &b, size);
+	}
 	free_stack(&a);
 }
+
+void short_sort(t_stack **a, t_stack **b, int size)
+{
+	if (size == 2)
+		sort_2(a);
+	else if (size == 3)
+		sort_3(a);
+	else if (size == 4)
+		sort_4(a, b);
+	else if (size == 5)
+		sort_5(a, b);
+}
+//c3r8p5% ARG=$(shuf -i 1-100 -n 100 | tr '\n' ' ');./push_swap $ARG | wc -l

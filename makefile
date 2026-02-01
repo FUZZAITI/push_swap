@@ -15,7 +15,8 @@ SRCS = \
 	split.c \
 	stacks_op.c \
 	swap_operations.c \
-	utils.c
+	utils.c \
+	short_sort.c
 
 OBJS = $(SRCS:.c=.o)
 

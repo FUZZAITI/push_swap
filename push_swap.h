@@ -47,6 +47,13 @@ void		index_array(int *ori, int *sorted, int size);
 
 int			max_bits(int size);
 void		radix_sort(t_stack **a, t_stack **b, int size);
+int			is_sorted(t_stack *a);
+void		short_sort(t_stack **a, t_stack **b, int size);
+void		sort_2(t_stack **a);
+void		sort_3(t_stack **a);
+void		sort_4(t_stack **a, t_stack **b);
+void		sort_5(t_stack **a, t_stack **b);
+void push_min_to_b(t_stack **a, t_stack **b, int size);
 
 t_stack		*init_stack(int *array, int size);
 t_stack		*stack_new(int value);
